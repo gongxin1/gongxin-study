@@ -1,0 +1,44 @@
+\documentclass[UTF8]{ctexart}
+
+\begin{document}
+
+\section{变分定义}
+函数$y(x)$的变分：在同一定义域上的两个函数$y(x),m(x)$,若彼此任意接近，那么$m(x)$与$y(x)$之差，记$\delta y(x)=m(x)-y(x)$称$y(x)$的变分。
+
+变分$\delta y$反映了整个函数的变化，而函数增量$ \Delta y $反应的是同一个函数由于自变量的取值不同引起的变化。
+
+泛函的变分：对任意一个泛函$J[y]$,函数$y$引起的泛函增量为$\Delta J=J[y+\delta y]-J[y]=L[y,\delta y]+\dfrac{1}{2!}Q[y,\delta y]+o(||\delta y||^2)$
+
+其中$L(y,\delta y)$是关于$\delta y$的线性泛函，$Q[y,\delta y]$是关于$\delta y$的两次线性泛函。
+
+则泛函的一阶变分$\delta J=L[y,\delta y]$,二阶变分$\delta^2J=Q[y,\delta y]$
+
+变分的另一种求法，任给一个齐次函数$\eta(x)$,边界值为零，对任意小的一个实数$\varepsilon$,$y^{*}(x)=y(x)+\varepsilon\eta(x)$当$\varepsilon=0$
+
+$\delta J=\varepsilon\frac{dJ[y+\varepsilon\eta]}{d\varepsilon}$
+
+$\delta^2 J=\frac{1}{2!}\varepsilon^2\frac{d^2J[y+\varepsilon\eta]}{d\varepsilon^2}$
+\section{泛函例子}
+例：已知泛函$J[y]=\int_{a}^{b}F(x,y,y^{'})\,\mathrm{d}x$
+
+$ \delta J[y]=\int_{a}^{b}[\frac{\partial F}{\partial y}\delta y+\frac{\partial F}{\partial y^{'}}\delta y^{'}]\,\mathrm{d}x $
+
+$=\frac{\partial F}{\partial y^{'}}(\delta y)+\int_{a}^{b}[\frac{\partial F}{\partial y}+\dfrac{d}{dx}(\frac{\partial F}{\partial y^{'}})]\delta y\,\mathrm{d}x $
+
+例：最短线问题，设经过$A,B$两点距离最短曲线方程为$y^{*}(x)$,另有任意连续可导函数$\eta=\eta(x)$,且$\eta(x)$满足$\eta(x_{0})=\eta(x_{1})=0$,则$y=y^{*}+\alpha\eta(x)$仍是过$A,B$的连续曲线，其对应长度为$L(a)=\int_{x_{0}}^{x_{1}}\sqrt{1+(y^{*})^{'}+\alpha\eta^{'})^2}\,\mathrm{d}x$
+
+当$a=0$，$y=y^{*}(x)$时$L(a)$取极小值，即$\frac{dL(a)}{da}=0$在$a=0$的地方
+
+$\frac{dL(a)}{da}=\int_{x_{0}}^{x_{1}}\frac{((y^{*})^{'}+\alpha\eta^{'})\eta^{'}}{\sqrt{1+((y^{*})^{'})^2}}\,\mathrm{d}x$
+
+$=\int_{x_{0}}^{x_{1}}\frac{(y^{*})^{'}\eta^{'}}{\sqrt{1+(y^{*})^2}}\,\mathrm{d}x$ 
+
+$=\frac{(y^{*})^{'}\eta}{\sqrt{1+(y^{*})^2}}-\int_{x_{0}}^{x_{1}}(\frac{(y^{*})^{'}}{\sqrt{1+((y^{*})^{'})^2}})^{'}\eta\,\mathrm{d}x$
+
+$=-\int_{x_{0}}^{x_{1}}(\frac{(y^{*})^{''}}{\sqrt{1+(y^{*})^2}}-\frac{(y^{*})^{'} (y^{*})^{'}(y^{*}){''}}{\sqrt{1+(y^{*})^3}}))\eta\,\mathrm{d}x$
+
+$=-\int_{x_{0}}^{x_{1}}\frac{y^{''}}{\sqrt{1+((y^{*})^{2})^3}}\eta\,\mathrm{d}x$
+
+由$\eta(x)$的任意性，由变分引理可得$\frac{y^{''}}{\sqrt{1+((y^{*})^{2}})^{3}}=0$
+
+\end{document}
