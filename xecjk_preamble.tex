@@ -4,6 +4,8 @@
 \usepackage{xltxtra,fontspec,xunicode}
 \usepackage[slantfont, boldfont]{xeCJK} 
 
+\setlength{\parindent}{2em}%中文缩进两个汉字位
+
 %% 针对中文进行断行
 \XeTeXlinebreaklocale "zh"             
 
@@ -20,11 +22,12 @@
 \punctstyle{kaiming}                                        
                                                      
 %% 设置缺省中文字体
-\setCJKmainfont[BoldFont={Adobe Heiti Std}, ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}   
+%\setCJKmainfont[BoldFont={Adobe Heiti Std}, ItalicFont={Adobe Kaiti Std}]{Adobe Song Std}   
+\setCJKmainfont{SimSun}
 %% 设置中文无衬线字体
-\setCJKsansfont[BoldFont={Adobe Heiti Std}]{Adobe Kaiti Std}  
+%\setCJKsansfont[BoldFont={Adobe Heiti Std}]{Adobe Kaiti Std}  
 %% 设置等宽字体
-\setCJKmonofont{Adobe Heiti Std}                            
+%\setCJKmonofont{Adobe Heiti Std}                            
 
 %% 英文衬线字体
 \setmainfont{DejaVu Serif}                                  

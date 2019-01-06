@@ -29,6 +29,7 @@
 \makeatletter
 \@ifclassloaded{beamer}{
 \usepackage{hyperref}
+\usepackage{ragged2e} % 对齐
 }{
 \usepackage[%
     pdfstartview=FitH,%
@@ -49,7 +50,9 @@
 
 \makeatletter % 如果是 beamer 不需要下面两个包
 \@ifclassloaded{beamer}{
-
+\mode<presentation>
+{
+} 
 }{
 %% 控制标题
 \usepackage{titlesec}
@@ -72,13 +75,16 @@
 
 %% AMS LaTeX宏包: http://zzg34b.w3.c361.com/package/maths.htm#amssymb
 \usepackage{amsmath,amssymb}
-
+%% 多个图形并排
+\usepackage{subfig}
 %%%% 基本插图方法
 %% 图形宏包
 \usepackage{graphicx}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\structure{#1}}
+\newcommand{\brown}[1]{\textcolor{brown}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
 
-%% 多个图形并排
-\usepackage{subfig}
 
 %%%% 基本插图方法结束
 
