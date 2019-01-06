@@ -1,0 +1,677 @@
+% !Mode:: "TeX:UTF-8"
+\documentclass{article}
+\input{en_preamble.tex}
+\input{xecjk_preamble.tex}
+\setCJKmainfont{STKaiti} % 如果请替换为本地系统有的字体
+%中文断行
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\begin{document}
+\title{第一章$\qquad$线性代数的背景}
+%\date{\today}
+\maketitle  %定义时间和标题
+%\tableofcontents
+%\newpage
+\section{}
+\subsection{矩阵}
+在这一章中，向量空间是定义在复数域上的，$\mathrm{C}^{n\times m}$ 表示由所有定义在$C$上的$n\times m$的矩阵构成的向量空间。
+
+加法：$C=A+B$，这里的$A$，$B$和$C$都$\in\mathrm{C}^{n\times m}$，即$c_{ij}=a_{ij}+b_{ij}$.
+
+数乘：$C=\alpha A$，即$c_{ij}=\alpha a_{ij}$.
+
+乘法：$C=AB$，这里A$\in\mathrm{C}^{n\times m}$，B$\in\mathrm{C}^{m\times p}$，C$\in\mathrm{C}^{n\times p}$，即$c_{ij}=\sum_{k=1}^m a_{ik}b_{kj}$.
+
+$a_{*j}$表示矩阵A的第j列，$a_{i*}$表示矩阵A的第i行。
+$A^H$表示矩阵A的转置共轭矩阵，即$A^H=\bar{A}^H=\bar{A^T}$.
+\subsection{方阵与特征值}
+I表示单位矩阵，若CA=AC=I，则称矩阵C为矩阵A的逆矩阵$A^{-1}$.
+
+$det(A)=a_{11}A_{11}+a_{11}A_{11}+\cdots+(-1)^{1+n}A_{1n}=\sum_{j=1}^n (-1)^{j+1} a_{1j}det(A_{1j}) $  
+
+如果$det(A)=0$，则称矩阵A是奇异的，否则称A为非奇异的。
+
+$det(AB)=det(A)det(B)$
+
+$det(A^T)=det(A)$
+
+$det(\alpha A)=\alpha ^n det(A)$
+
+$det(\bar{A})=\overline{det(A)}$
+
+$det(I)=1$
+
+\newtheorem{thm}{命题}
+\begin{thm}
+设A是n阶方阵，如果存在数$\lambda$和非零n维列向量u，使得$Au=\lambda u$成立，则称$\lambda$是A的一个特征值,非零向量u称为矩阵A的对应于特征值$\lambda$的特征向量。
+
+$p_A(\lambda)=det(A-\lambda I)$称为矩阵A的特征多项式，$\lambda $是矩阵A的特征值当且仅当$det(A-\lambda I)\equiv p_A(\lambda)=0$，即$\lambda $是矩阵A的特征多项式的一个根。
+
+矩阵A的谱是指A的所有特征值组成的集合，记为$\sigma (A)$。
+
+矩阵A是奇异的当且仅当A有一个特征值为0。
+\end{thm}
+
+\newtheorem{thm}{命题}
+\begin{thm}
+矩阵A是非奇异的当且仅当A可逆。
+
+矩阵A的谱半径等于矩阵A的特征值的模的最大值，记为$\rho (A)$，矩阵A的迹等于A的所有对角线元素的和，记为$tr(A)=\sum_{i=1}^n a_{ii}$，也等于A的所有特征值的和。
+\end{thm}
+\newtheorem{thm}{命题}
+\begin{thm}
+如果$\lambda$是矩阵A的特征值，那么$\bar\lambda$是矩阵$A^H$的特征值。
+
+如果存在一个非零列向量$x$使得$Ax=\lambda x$，则称$\lambda $为一个右特征值，x称为矩阵A的特征值$\lambda $的右特征向量。
+如果存在一个非零列向量$y$使得$yA=y\lambda$，则称$\lambda $为一个左特征值，y称为矩阵A的特征值$\lambda $的左特征向量。
+
+$Au=\lambda u$，$v^HA=\lambda v^H$.
+
+$u^HA^H=\bar{\lambda}u^H$，$A^Hv=\bar{\lambda}v$.
+\end{thm}
+
+\subsection{矩阵类型}
+接下来介绍一些特殊的矩阵类型：
+
+对称矩阵：$A^T=A$
+
+Hermitian矩阵：$A^H=A$
+
+反对称矩阵:$A^T=-A$
+
+反埃尔米特矩阵：$A^H=-A$
+
+正规矩阵：$A^HA=AA^H$
+
+非负矩阵：$a_({j}\ge 0,i,j=1,...,n$(同理定义非正矩阵)
+
+酉矩阵：$Q^HQ=I$
+
+对角矩阵：$a_{ij}=0,i\neq j$，记$A=diag(a_{11},a_{22},...,a_{nn})$
+
+上三角矩阵：$a_{ij}=0,i>j$,类似，下三角矩阵：$a_{ij}=0,i<j$
+
+上双对角线矩阵：$a_{ij}=0,i\neq j$，或者$j\neq i+1$.类似，下双对角矩阵：$a_{ij}=0,i\neq j$，或者$j\neq i-1$.
+
+三对角线矩阵：$a_{ij}=0,|j-i|>1$,形如$A=tridiag(a_{i,i-1},a_{ii},a_{i,i+1})$
+
+带矩阵：$a_{ij}\neq 0,i-m_l\leqslant j\leqslant i+m_u$,$m_l,m_u$是两个非负整数，数$m_l+m_u+1$叫做矩阵的带宽。
+
+Upper Hessenberg 矩阵：$a_{ij}=0,i>j+1$.类似 Lower Hessenberg矩阵：$_{ij}=0,i<j-1$
+
+外积矩阵：$A=uv^H$,此处的uv为列向量。
+
+置换矩阵：它在每行和每列中只有一个1，而在其他地方则为0。
+
+分块对角矩阵：A为n阶方阵，若A的分块矩阵只有在主对角线上有非零子块，其余子块都为零矩阵，且非零子块都是方阵。记$A=diag(A_{11},A_{22},...,A_{nn})$
+
+块三对角矩阵：非零系数在如下的三条对角线上：主对角线、低对角线、高对角线。
+\subsection{向量内积和范数}
+在一个向量空间X中，内积是一个$X\times X$到R(C)的一个映射：$x\epsilon X,y\epsilon X \longrightarrow s(x,y)\epsilon R $,且它满足如下条件：
+
+1.$s(x,y)$是关于x是线性的，$s(\lambda _1 x_1+\lambda _2 x_2)=\lambda _1 s(x_1,y)+\lambda _2 s(x_2,y),\forall x,y\epsilon X,\forall \lambda _1 ,\lambda _2 \epsilon R(C)$.
+
+2.$s(x,y)=\overline{s(y,x)},\forall x,y\epsilon X$，当$x,y$取实数域时$s(x,y)=s(y,x)$
+
+3.$s(x,y)\ge 0$当且仅当$x=0$时，等号成立。
+
+4.Cauchy-Schwartz不等式：$(\vert s(x,x)\vert)^2\leqslant s(x,x)s(y,y)$.
+
+特别注意当X空间取复数域时，内积$(x,y)=\sum_{i=1}^n x_i\bar{y}_i$,它经常被写成$(x,y)=y^Hx$.欧几里德内积在矩阵计算中的一个基本性质：$(Ax,y)=(x,Ay),\forall x,y\epsilon C$
+
+\newtheorem{thm}{命题}
+\begin{thm}
+酉矩阵保留欧几里德内积，$(Qx,Qy)=(x,y)$,对任意酉矩阵和向量$x,y$都成立。
+\end{thm}
+
+证明：$(Qx,Qy)=(x,Q^HQ)=(x,y)$
+
+在内积空间中，我们可以定义范数，令$\parallel x\parallel=\sqrt{(x,x)}$,则此由内积定义的范数满足：
+1.$\parallel x\parallel \ge 0,\forall x\epsilon X$,并且$\parallel x\parallel=0$当且仅当$x=0$.
+
+2.$\parallel \alpha x\parallel =|\alpha| \parallel x\parallel,\forall x\epsilon X,\forall \alpha \epsilon C$.
+
+3.$\parallel x+y \parallel \leqslant \parallel x\parallel + \parallel y\parallel ,\forall x,y\epsilon X$.
+
+从上面的命题可以看出，一个酉矩阵保留欧几里德范数，$\parallel Qx \parallel_2=\parallel x \parallel_2,\forall x$.由此我们可以看出酉矩阵是保范的。下面介绍向量的几个范数：
+$\parallel x \parallel_p=(\sum_{i=1}^n |x_i|^p)^{1/p}$.且当$p=1,2,\infty$时
+
+$\parallel x \parallel_1=|x_1|+|x_2|+...+|x_n|$
+
+$\parallel x \parallel_2=[|x_1|^2+|x_2|^2+..+|x_n|^2]^{1/2}$
+
+$\parallel x \parallel_\infty=\max |x_i|$
+
+Cauchy-Schwartz不等式变成$|(x,y)|\leqslant \parallel x \parallel_2\parallel y\parallel_2$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{正交向量和子空间}
+一个向量集合$G={a_1,a_2,...a_r}$如果满足$(a_i,a_j)=0,i\neq j$,则称为正交集。且对$G$的每一个向量$(\parallel a_i \parallel)_2=1$,称为标准正交集。一个向量正交于子空间$S$的每一个向量，就称正交于这个子空间。与$S$所有正交的向量的构成的集合是一个子空间，称为$S$的正交补，记$S^\perp$。且任何向量都可以分解成$S$与$S^\perp$中的向量和。
+
+每一个子空间都有一个标准正交基，这个标准正交基是通过任意一组基标准正交化得到的，通常用Gram-Schmidt算法求出。
+
+\begin{definition}
+设$A\epsilon C^{n\times n}$,如果存在$n$阶酉矩阵$Q$和$n$阶上三角矩阵$R$，使$A=QR$则称之为$A$的$QR$分解或酉三角分解。当$A\epsilon R^{n\times n}$时，称为$A$的正三角分解。
+\end{definition}
+
+任意满秩实（复）矩阵$A$，都可以唯一地分解$A=QR$，其中$Q$为正交（酉）矩阵，$R$是具有正对角元的上三角矩阵。
+\subsection{矩阵的规范形式}
+下面讨论将方阵简化对角线形式，或者上三角形式的简单方阵。且这种简单转化保留特征值不变。
+
+\begin{definition}
+矩阵$A,B$称为相似的，如果存在一个非奇异矩阵$X$使得   $A=X^{-1}BX$  
+\end{definition}
+
+对进行运算称为对进行相似变换，称可逆矩阵为相似变换矩阵。
+
+下面介绍一些术语：
+
+1.矩阵$A$的一个特征值的有几重根，这个几重根就叫做这个特征值的代数重数。
+
+2.如果一个特征值的代数重数是1，则这个特征值是简单的；矩阵$A$的特征值代数重数不是1，则是非简单的。
+
+3.矩阵$A$的特征值所对应的特征向量所构成空间（即特征子空间，也是方程组$(λI-A)x=0$的维数，称为几何重数。
+
+4.如果$A$的某个特征值的几何重数严格小于代数重数，我们就说$A$是有亏的；如果$A$的每个特征值的几何重数都与它的代数重数相等，我们就称$A$是无亏的；如果$A$的每个特征值的几何重数都是1，我们称A是无损的，否则有损的。
+\subsubsection{矩阵可对角化}
+\newtheorem{thm}{定理}
+\begin{thm}
+$n$维矩阵可对角化，当且仅当它有$n$个线性无关的特征向量。
+\end{thm}
+
+\newtheorem{thm}{定理}
+\begin{thm}
+$n$维矩阵可对角化，当且仅当它的所有特征值是半单特征值。（半单特征值指特征值无重根）
+\end{thm}
+
+\subsubsection{若尔当标准型}
+\begin{definition}
+若尔当标准型是由若干个主对角线为特征值，下方（或上方）次对角线全为1，其余全为0的若尔当块按对角排列组成的准对角矩阵。不是每个n阶矩阵通过初等变换都能化为对角矩阵，但每个n阶复数矩阵A通过初等变换都能化为若尔当标准型，这个若尔当形矩阵除去其中若尔当块的排列次序不同外是被矩阵A唯一确定的，它称为矩阵A的若尔当标准型。
+\end{definition}
+
+\newtheorem{thm}{定理}
+\begin{thm}
+如何一个矩阵$A$都可以简化为由$p$个对角块组成的对角矩阵，每个对角块与一个不同特征值$\lambda _i$有关。每个对角块本身是由$\gamma _i$个子块构成的对角结构，其中$\gamma _i$是特征值$\lambda _i$的几何重数。每个子块是若尔当块，由这些若尔当块组成的准对角矩阵称为若尔当标准型。
+
+一个矩阵$A$存在一个可逆矩阵$X$,使得$X^{-1}AX=J=\begin{bmatrix}
+J_1 &\cdots & 0\\
+0 &J_2\cdots & 0\\
+\vdots & \ddots & \vdots\\
+0 & \cdots & J_p
+\end{bmatrix}$,
+
+$\begin{bmatrix}
+J_{i1} &\cdots & 0\\
+0 &J_{i2}\cdots & 0\\
+\vdots & \ddots & \vdots\\
+0 & \cdots & J_{i\gamma _i}
+\end{bmatrix}$,其中
+$\begin{bmatrix}
+\gamma _i &1&\cdots & 0&0\\
+0 &\gamma _i&1&\cdots & 0\\
+0&0&\vdots & \ddots & \vdots\\
+0&0&\vdots & \ddots &1\\
+0 &0&0& \cdots & \gamma _i
+\end{bmatrix}$
+
+每一个$J_{ik}$块对应一个与特征值$\gamma _i$有关的特征向量。
+\end{thm}
+\subsection{Schur分解}
+下面将得出任何一个方阵都可以唯一相似一个上三角矩阵。
+
+\newtheorem{thm}{定理}
+\begin{thm}
+对任意方阵$A$,存在一个酉矩阵$Q$,使得$Q^HAQ=R$,其中$R$是一个上三角矩阵。
+\end{thm}
+
+这个其实就是Schur分解，当$AQ=QR$时，推出对任意$i\leqslant j\leqslant k$,我们有$Aq_j=\sum_{i=1}^{i=j} r_{ij}q_i$.如果将矩阵$Q,R$按列分块，令$Q_k=[q_1,q_2,...,q_k]$,并且$R_k$也是$R$的前$k$列，我们同样有$AQ_k=Q_kR_k$,这被称为矩阵$A$的部分舒尔分解。并且最简单的形式当$k=1$时，这里的$q_1$是一个特征向量。平时$q_i$被称为舒尔向量。
+\subsection{矩阵幂的应用}
+\newtheorem{thm}{定理}
+\begin{thm}
+序列$A^k,k=0,1,...,$收敛于0时当且仅当$\rho (A)<1$。
+\end{thm}
+
+\newtheorem{thm}{定理}
+\begin{thm}
+级数$\sum_{k=0}^\infty A^k$ 收敛当且仅当$\rho (A)<1$。在这个条件下，$I-A$是非奇异的并且这个级数的极限等于$(I-A)^{-1}$。
+\end{thm}
+
+\newtheorem{thm}{定理}
+\begin{thm}
+对于任意矩阵范数$\parallel .\parallel$，我们有$\lim_{k \to \infty}\parallel A^k\parallel ^{1/k}=\rho (A)$
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{正定矩阵}
+一个实方阵是正定的如果$(Au,u)>0$，$\forall$ $ u  \epsilon  R^n,u\neq 0.$
+
+任一个方阵$A$（实或者复）都可以分解成
+$$A=H+iS,$$
+其中
+$$H=\frac{1}{2}(A+A^H),$$
+$$S=\frac{1}{2i}(A-A^H).$$
+
+则矩阵$H,S$是Hermitian，而$iS$是skew-Hermitian.这个分解类似与一个数$z$可以分解成$z=x+iy$，
+$$x=\Re (z)=\frac{1}{2}(z+\bar{z}),y=\Im (z)=\frac{1}{2i}(z-\bar{z}).$$
+
+当方阵$A$是实的，$u$是实向量时，$(Au,u)$是实的，结果上述的分解$A=H+iS$可以写成$(Au,u)=(Hu,u)$，由此可以得到下面定理
+
+\begin{thm}
+令方阵$A$是实的正定矩阵，则$A$是非奇异的。此外，存在一个系数$\alpha >0$使得
+$$(Au,u)\geqslant \alpha \parallel x \parallel _2^2,\forall u\epsilon R^n$$
+\end{thm}
+
+\begin{thm}
+当$A$是任意方阵（可能为复方阵），令$H=\frac{1}{2}(A+A^H),S=\frac{1}{2i}(A-A^H)$。则矩阵$A$的任意特征向量$\lambda _i$使得
+$$\lambda_{min}(H)\leqslant \Re (\lambda _j)\leqslant \lambda_{max}(H),$$
+$$\lambda_{min}(S)\leqslant \Im (\lambda _j)\leqslant \lambda_{max}(S).$$
+\end{thm}
+
+\subsection{投影算子}
+投影算子是在赋范线性空间$X$上具有幂等性的有界线性算子。设$P$是$X$上的有界线性算子，如果$P^2=P$，则称P为投影算子。投影算子有一些简单性质$Null(P)=Ran(I-P)$，此外，$Null(P)\bigcap Ran(P)=\emptyset$。并且$C^n$中每一个元素都可以被写成$x=Px+(I-P)x$,因此空间$C^n$可以被直和分解成$C^n=Null(P)+Ran(P)$
+\newtheorem{thm}{定理}
+\begin{thm}
+给定$C^n$空间的两个相同维数的子空间$M$和$L$,下面的两个条件是相互等价的。
+
+(1).子空间$M$中没用非零向量垂直于$L$;
+
+(2).对于$\forall x\epsilon C^n$,存在唯一的$u$，使得$u\epsilon M,x-u\epsilon L^\bot$
+\end{thm}
+
+\subsection{正交投影算子}
+\begin{definition}
+设$H$是希尔伯特空间，$M$是$H$上的闭子空间。对$\forall x\epsilon H$，令$Px=x_0$为$x$在$M$上的正交投影，即$x=Px+y$，其中 $Px\epsilon M,y\epsilon M^\perp$。称$P$为$H$到$M$上正交投影算子。
+\end{definition}
+
+正交投影算子具有以下几个基本性质：
+
+1.正交投影算子$P$是有界线性算子，且$\parallel P \parallel=1$。
+
+2.投影算子$P$是幂等算子，即$P^n=P$
+
+3.$P$是一个投影算子，则$I-P$也是一个投影算子，并且满足$Null(P)=Ran(I-P)$
+
+$P$是一个正交投影算子，则向量$Px,(I-P)x$是正交的，且满足$\parallel x\parallel _2^2=\parallel Px\parallel _2^2+\parallel (I-P)x\parallel _2^2$,由此可知$\parallel Px\parallel _2\leqslant \parallel x\parallel _2$,所以$\max \parallel Px\parallel _2 /\parallel x\parallel _2\leqslant 1$,即$\parallel P\parallel _2\leqslant 1$。
+
+\begin{thm}
+$P$是子空间$M$上的正交算子，则$C^n$上的任意向量$x$，和$M$中任意向量$y$都满足
+$$\min \parallel x-y\parallel _2\leqslant \arallel x-Px\parallel _2$$
+\end{thm}
+
+并且任给定子空间$M$，和$C^n$中任意向量$x$,则$\min \limits_{y\epsilon M} \parallel x-y\parallel _2= parallel x-x^*\parallel _2$，当且仅当它满足
+$$\begin{cases}
+y^*  \epsilon M \\
+x-y^*\perp M
+\end{cases}
+$$
+
+
+
+
+
+
+
+
+
+
+\title{第二章$\qquad$偏微分方程离散化}
+%\date{\today}
+\maketitle  %定义时间和标题
+%\tableofcontents
+%\newpage
+\section{}
+\subsection{偏微分方程}
+偏微分方程是稀疏矩阵问题的最大来源。求解这类方程的典型方法是离散化，例如，用有限个未知数的方程来近似它们。这些离散化产生的矩阵问题通常是大而稀疏的，例如，它们的非零分量很少，有几种不同的方法可以离散偏微分方程。最简单的方法是对偏微分算子采用有限差分近似。有限元法用一个在全局域上具有一定导数的函数代替了原来的函数，在简单的单元上是分段多项式，如小三角形或矩形。这种方法可能是目前最通用和最容易理解的离散化技术。在这两种方法之间，还有一个被称为有限体积法的保守方法，它们试图模拟连续的物理守恒定律。本章介绍了这三种不同的离散方法。
+
+\subsubsection{椭圆算子}
+Poisson方程:                   
+
+$$\dfrac{\partial ^2u}{\partial x_1^2}+\dfrac{\partial ^2u}{\partial x_2^2}=f$,对于$\forall x=\begin{pmatrix}
+x_1  \\
+x_2
+\end{pmatrix} \epsilon  \Omega$$
+
+$\Omega$是$R^n$上的一个有界的开集，$x_1,x_2$是两空间变量。上述方程只适用于位于域$\Omega$内部的点，同样重要的是在$\Omega$的边界$\mathcal{T}$上必须满足的条件。这些被称为边界条件，它们有三种常见类型:
+
+Dirichlet条件：           $u(x)=\phi (x)$
+
+Neumann条件：             $\frac{\partial u}{\partial \vec{n}}(x)=0$
+
+Cauchy条件：$\frac{\partial u}{\partial \vec{n}}(x)+\alpha(x)u(x)=\gamma (x)$
+
+ $\vec n$ 是 $\Omega$ 边界 $\mathcal{T}$ 上的单位外法线向量.对于给定的单位向量$\vec{v}$有两分量$v_1,v_2$，方向导数$\frac{\partial u}{\partial \vec{v}}$定义为：
+ 
+ $$\frac{\partial u}{\partial \vec{v}}(x)=\lim_{n \to\ 0}\frac{u(x+h\vec{v})-u(x)}{h}$
+
+ $=\frac{\partial u}{\partial x_1}(x)v_1+\frac{\partial u}{\partial x_2}(x)v_2$
+
+ $=\triangledown u.\vec{v}$$
+
+ $\triangledown$为$u$的梯度：
+ $$\triangledown u=\begin{pmatrix}
+ \frac{\partial u}{\partial x_1} \\
+\frac{\partial u}{\partial x_2}
+\end{pmatrix}$$
+
+特殊情况是当$f(x)=0$时，$\triangledown u=0$，并且边界条件必须加上，这就是拉普拉斯方程。
+
+拉普拉斯算子：
+$$\triangle=\dfrac{\partial ^2}{\partial x_1^2}+\dfrac{\partial ^2}{\partial x_2^2}$$
+
+椭圆算子：
+$$L=\dfrac{\partial}{\partial x_1}(a\dfrac{\partial}{\partial x_1})+\dfrac{\partial}{\partial x_2}(a\dfrac{\partial}{\partial x_2})=\triangledown .(a\triangledown)$$
+
+散度：
+$$div\vec{v}=\triangledown .\vec{v}=\dfrac{\partial v_1}{\partial x_1}+\dfrac{\partial v_2}{\partial x_2}$$
+
+由此椭圆算子可以写成：
+$$L=\dfrac{\partial}{\partial x_1}(a_1\dfrac{\partial}{\partial x_1})+\dfrac{\partial}{\partial x_2}(a_2\dfrac{\partial}{\partial x_2})=\triangledown (\vec .a\triangledown)$$
+
+\subsubsection{对流扩散方程}
+许多问题涉及“对流”和“扩散”的结合。用对流扩散方程模拟了下面的现象：
+
+$$\dfrac{\partial u}{\partial t}+b_1\dfrac{\partial u}{\partial x_1}+b_2\dfrac{\partial u}{\partial x_2}=\triangledown .(a\triangledown)u+f$$
+或者
+$$\dfrac{\partial u}{\partial t}+\vec b.\triangledown u=\triangledown .(a\triangledown)u+f$$
+
+这个稳定状态的版本还可以写成：$$-\triangledown .(a\triangledown)u+\vec b.\triangledown u=f$$
+
+
+%\end{document}
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\newtheorem{thm}{定理}
+%\begin{thm}
+
+%\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%函数$y(x)$的变分定义为$\delta y=y_1(x)-y(x)$，其中$y_1(x)$是“靠近”$y(x)$的一个函数，即$\delta y$是同一自变量$x$处相邻函数的函数值之差。
+
+%注意：
+
+%$(\delta y)'=y'_1(x)-y'(x)=\delta y'$
+
+%$(\delta y)^n=\delta y^n $
+%\subsection{泛函的变分}
+%定义泛函$J[y(x)]=\int_{a}^{b} f(x,y,y')\mathrm{d}x$，则增量$\bigtriangleup J=\int_{a}^{b}[f(x,y+\delta y,y'+\delta y')-f(x,y,y')]\mathrm{d}x=\int_{a}^{b}[\frac{\partial f}{\partial y}\delta y + \frac{\partial f}{\partial y'}\delta y'+\frac{1}{2}\frac{\partial^2 f}{\partial^2 y}(\delta y)^2+\frac{\partial^2 f}{\partial y\,\partial y'}\delta y\delta y'+\frac{1}{2}\frac{\partial^2 f}{\partial y'^2}(\partial y')^2+\cdots]\mathrm{d}x$
+
+%舍弃掉$\delta y$和$\delta y'$二次项及以上的高次项，得到关于$\delta y$和$\delta y'$一次项的和，称为$J[y(X)]=\int_{a}^{b} f(x,y,y')\mathrm{d}x$的一阶变分，简称为泛函的变分，即$\delta J=\int_{a}^{b}(\frac{\partial f}{\partial y}\delta y + \frac{\partial f}{\partial y'}\delta y')\mathrm{d}x$。
+%\subsection{泛函变分的基本运算法则}
+%泛函变分运算法则与微分运算法则基本相同
+
+%$(\delta F_1 +F_2)=\delta F_1 +\delta F_2$
+
+%$(\delta F)^n=nF^n-1\delta F$
+
+%$(\delta F_1 \cdot F_2)=F_2\delta F_1+F_1\delta F_2$
+
+%$(\delta (\frac{F_1}{F_2})=\frac{1}{F^2_2}(F_2\delta F_1-F_1\delta F_2)$
+
+%$\delta\int_{a}^{b}F\mathrm{d}x=\int_{a}^{b}\delta F\mathrm{d}x$
+
+
+
+
+
+
+
+%如果将泛函取极值时的函数定义为$y(x)$，并且定义与函数$y(x)$相靠近的函数为$y(x,\varepsilon)$,记为$y(x,\varepsilon)=y(x)+\varepsilon\eta(x)$,$\varepsilon$是一个参数。
+%函数$y(x)$的变分定义为$\delta y=\eta(x)\mathrm{d}\varepsilon$,由此可得$\delta y'=\eta ^\prime(x)\mathrm{d}\varepsilon$
+%定义泛函$J[y(X)]=\int_{a}^{b} F(x,y,y')\mathrm{d}x$的变分为$\delta J=\int_{a}^{b}(\frac{\partial F}{\partial y}\delta y + \frac{\partial F}{\partial y'}\delta y')\mathrm{d}x$。
+
+%\subsection{泛函变分举例}
+%计算泛函$J[y(x)]=\int_{-1}^{1} (y'e^7 +xy^2)\mathrm{d}x$的变分
+
+
+%$\delta J[y(x)]=\delta\int_{-1}^{1}(y'e^7+xy^2)\mathrm{d}x=\int_{-1}^{1}(2xy\delta y+e^7\delta y')\mathrm{d}x=\int_{-1}^{1}(2xy\delta y)\mathrm{d}x+\int_{-1}^{1}e^7\mathrm{d}\delta y=\int_{-1}^{1}(2xy\delta y)\mathrm{d}x
+%$，最后一步利用上边界上函数变分为0。
+
+
+
+
+
+
+%\begin{equation}
+%-\nabla \cdot (\beta\nabla u) = f(x,y),\,\ (x,y)\in \Omega
+%\end{equation}
+%Dilichlet 边界条件
+
+%\begin{equation}
+%u(x,y) = g(x,y),\,\ (x,y)\in \partial \Omega
+%\end{equation}
+%\subsection{符号}
+%\begin{tabular}{ |l|l| }   
+%\hline   
+%\multicolumn{2}{|c|}{符号说明} \\   
+%\hline
+%符号 & 含义\\
+%\hline
+%$\Omega$ & 二维长方形区域 \\
+%\hline
+%$nx$ & $x$ 方向剖分的段数 \\
+%\hline
+%$ny$ & $y$ 方向剖分的段数 \\
+%\hline
+%$hx$ &  $x$ 方向每段的长度\\
+%\hline
+%$hy$ &  $y$ 方向每段的长度 \\
+%\hline
+%$\mu$ & $the \,\ viscosity \,\ coefficient$ \\
+%\hline
+%$k$ & $the \,\ permeability \,\ tensor$ \\
+%\hline 
+%$NC$ & 代表 $cell$ 的个数 \\
+%\hline
+%$NE$ & 代表总的 $edge$ 的个数 \\
+%\hline
+%\end{tabular}
+
+%\section{欧拉—拉格朗日方程}
+%欧拉—拉格朗日方程是泛函极值问题的必要条件，假设$J[y(x)]$的极值问题的解为$y=y(x)$，现在推导这个解所满足的微分方程。
+
+%$\delta J=\int_{a}^{b}(\frac{\partial f}{\partial y}\delta y + \frac{\partial f}{\partial y'}\delta y')\mathrm{d}x=0$，将第二项分部积分得到$\int_{a}^{b}(\frac{\partial f}{\partial y'}\delta y')\mathrm{d}x=\int_{a}^{b}\frac{\partial f}{\partial y'}\mathrm{d}\delta y$，因为$\delta y(a)=0$，$\delta y(b)=0$，所以$\int_{a}^{b}(\frac{\partial f}{\partial y'}\delta y')\mathrm{d}x=-\int_{a}^{b}\delta y\mathrm{d}\frac{\partial f}{\partial y'}$，因此$\delta J=\int_{a}^{b}\frac{\partial f}{\partial y}\delta y\mathrm{d}x-\int_{a}^{b}\delta y\mathrm{d}\frac{\partial f}{\partial y'}=\int_{a}^{b}(\frac{\partial f}{\partial y}-\frac{\mathrm{d}\frac{\partial f}{\partial y'}}{\mathrm{d}x})\delta y\mathrm{d}x=0$，因为对于任何函数$\delta y$都成立，故$\frac{\partial f}{\partial y}-\frac{\mathrm{d}\frac{\partial f}{\partial y'}}{\mathrm{d}x}=0$，这就是欧拉—拉格朗日方程。
+%\begin{equation*}
+%\begin{cases}
+%\begin{aligned}
+%\frac{\mu}{k}\mathbf{u} + \nabla p & = 0 \quad in \,\ \Omega = (0,1)\times (0,1) \\
+%\nabla \cdot \mathbf{u} & = f \quad in \,\ \Omega \\
+%\mathbf {u} & = 0 \quad on \,\ \partial \Omega
+%\end{aligned}
+%\end{cases}
+%\end{equation*}
+
+%且有 \\
+%\begin{equation*}
+%\int_{\Omega}f dxdy = 0
+%\end{equation*}
+
+%记 $u$ 为 $\mathbf{u}$ 在 $x$ 方向的分量，$v$ 为 $\mathbf{u}$ 在 $y$ 方向的分量,则有 \\
+
+%\begin{equation*}
+%\begin{cases}
+%\begin{aligned}
+%\frac{\mu}{k}\cdot u + \partial_x p & = 0 \quad (1) \\
+%\frac{\mu}{k}\cdot v + \partial_y p & = 0 \quad (2) \\
+%\partial_x u + \partial_y v & = f \quad (3)
+%\end{aligned}
+%\end{cases}
+%\end{equation*}
+
+%\section{离散后组装矩阵}
+%利用一阶向前差分把方程变成差分方程，现在从 $edge$ 和 $cell$ 的角度考虑模型。 \\
+
+%对于 $(1)$, 从内部纵向 $edge$ 的角度考虑:
+%我们需要找到内部纵向 $edge$ 所对应的左手边的 $cell$ 和右手边的 $cell$. 左右两边的$cell$ 所对应的 $p$ 分别记为 $p_{l}$、$p_{r}$.$u$ 为 $edge$ 的中点，记为 $u_m$。按照 $mesh$ 里的编号规则排序。\\
+
+%则每条内部边上所对应的差分方程为:
+
+%\begin{equation*}
+%\frac{\mu}{k} \cdot u_m + \frac{p_r - p_l}{hx} = 0
+%\end{equation*}
+
+%对于 $(2)$,从内部横向 $edge$ 的角度考虑:
+%我们需要找到内部横向 $edge$ 所对应的左手边的 $cell$ 和右手边的 $cell$. $cell$ 所对应的 $p$ 与 $(1)$ 中的相同。$v$ 为 $edge$ 的中点，记为 $v_m$。\\
+
+%则每条内部边上所对应的差分方程为:\\
+
+%\begin{equation*}
+%\frac{\mu}{k} \cdot v_m + \frac{p_l - p_r}{hy} = 0
+%\end{equation*}
+
+%对于 $(3)$, 从 $cell$ 的角度考虑:
+%由于单元是四边形单元，我们记单元所对应边的局部编号为[0,1,2,3](StructureQuadMesh.py 里的网格)，第 $i$ 个单元所对应的边记为 $e_{i,0},e_{i,1},e_{i,2},e_{i,3}$。\\
+
+%则 $(3)$ 式第 $i$ 个单元所对应的差分方程为:\\
+
+%\begin{equation*}
+%\frac{u_{e_{i,1}} - u_{e_{i,3}}}{hx} + \frac{v_{e_{i,2}} - v_{e_{i,0}}}{hy} = f_i
+%\end{equation*}
+
+%我们需要生成一个 $(NE+NC)\times(NE+NC)$的系数矩阵，把它看成分块矩阵
+%\begin{equation*}
+%\begin{pmatrix}
+% A_{1,1} & A_{1,2} \\
+%A_{2,1} & A_{2,2}
+%\end{pmatrix}
+%\end{equation*}
+
+%其中 \\
+
+%\begin{equation*}
+%\begin{aligned}
+%A_{1,1} : NE\times NE \\
+%A_{1,2} : NE\times NC \\
+%A_{2,1} : NC\times NE \\
+%A_{2,2} : NC\times NC
+%\end{aligned}
+%\end{equation*}
+
+%$A_{1,1}$ 对应的是 $(1),(2)$ 两式的第一项，即含有 $u,v$ 的项，$A_12$ 对应的是 $(1),(2)$ 两式的第二项。
+
+%\newpage
+%\nocite{*}
+%\bibliography{ref}
+\end{document}
+
