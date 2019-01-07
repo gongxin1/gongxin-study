@@ -1,18 +1,15 @@
 % !Mode:: "TeX:UTF-8"
-\documentclass{article}
-\input{en_preamble.tex}
-\input{xecjk_preamble.tex}
-\setCJKmainfont{STKaiti} % 如果请替换为本地系统有的字体
-%中文断行
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\documentclass[12pt,a4paper]{article}
+\input{../en_preamble.tex}
+\input{../xecjk_preamble.tex}
+
+\title{连续高斯链模型}
+\author{龚欣}
+\date{\chntoday}
+
 \begin{document}
-\title{}
-%\date{\today}
 \maketitle
-%\tableofcontents
-%\newpage
-\section{连续高斯链模型}
+
 连续高斯链是一种用于分析和数值计算的理想链模型，该模型可以被描述为离散高斯链模型的连续极限，其中的聚合物被视为一个连续的线性弹性丝。如图1所示，连续高斯链的构型由空间曲线$\mathbf{r}(s)$描述，其中$s\in [0,N]$，表示高分子长链上某一链节的位置，被定义为路径（contour）变量。第$s$个链节在空间中的位置记为$\mathbf{r}(s)$，末端距矢量（end-to-end-vector）$R$可以表达为$R=\mathbf{r}(N)−\mathbf{r}(0)$。
 
 \begin{figure}[H]
@@ -20,6 +17,7 @@
 \includegraphics[scale=0.7]{./figures/1.png}
 \caption{}
 \end{figure}
+
 
 图1:连续高斯链模型将聚合物的构型描述为空间曲线$\mathbf{r}(s)$，其中$s\in [0,N]$是路径参数。$\mathbf{r}(0)$和$\mathbf{r}(N)$是链端位置。
 
@@ -114,6 +112,12 @@ Fokker-Planck方程是特别方便，因为有各种各样的分析和数值技�
 $$p_0(\mathbf{r},s)=\left[ 3/(2 \pi sb^2) \right]^{3/2}\exp \left[ -3\left| \mathbf{r} \right|^2/(2sb^2) \right]$$
 
 如果令$s=N,\mathbf{r}=\mathbf{R}$，则末端距矢量恢复成熟悉的高斯分布函数$p_0(\mathbf{R},N)=\left[ 3/(2 \pi N b^2) \right]^{3/2}\exp \left[ -3\left| \mathbf{R} \right|^2/(2N b^2) \right]$。在比单键大的尺度下，离散高斯链和连续高斯链明显具有相同的链端分布函数。使用连续链的优点是它允许用偏微分方程进行计算。这一优势将在第三章中变得更加明显，在第三章中，我们将考虑有外势的链。
-\nocite{*}
-%\bibliography{ref}
+
+
+
+
+\input{test.tex}
+
+\cite{tam19912d}
+%\bibliography{../ref}
 \end{document}
