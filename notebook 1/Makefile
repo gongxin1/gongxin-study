@@ -1,6 +1,6 @@
 
 main = main
-all_file = ${main}.tex test.tex
+all_file = ${main}.tex 3.3.tex 2.4.tex
 
 pdf: ${main}.pdf
 
