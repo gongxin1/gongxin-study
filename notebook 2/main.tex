@@ -3,16 +3,66 @@
 \input{../en_preamble.tex}
 \input{../xecjk_preamble.tex}
 
-\title{非均相聚合物的平衡理论}
-\author{蒋老师课题组}
+\title{The Shapes of Things}
+\author{龚欣}
 \date{\chntoday}
 
 \begin{document}
 \maketitle
+\section{第一章}
+\subsection{曲面上微分方程}
+这本书提供了一个微分几何的介绍，这对含有几何片微分方程（PDE）的数学模型很有用，例如标准拉普拉斯方程的曲面或流形（manifold）。尤其是，这需要发展曲面梯度和曲面拉普拉斯算子。这些在标准欧几里得空间里（如$\mathbb{R}^n$）是普通的梯度$\bigtriangledown$和拉普拉斯算子$\bigtriangleup=\bigtriangledown \cdot \bigtriangledown$，但是在曲面或流体上定义就会变得特殊。\\
 
-共聚物是一种重要的软物质．\\
+这种方法的优点是，它提供了几何量的替代公式，例如这些在微分几何中的公式，和（平均）曲率（curvature）比文章平时的表达式更清楚。
+
+\subsection{关于形状的微分}
+这本书中的微分几何方法有利于形状微分学的框架发展（framework of shape differential calculus），这是研究一个独立的“形状变量”的如何随其变化而变化的。
+
+\subsubsection{一个简单例子}
+接下来的例子需要freshman calculus的工具。令$f=f(r,\theta)$是定义在极坐标下半径为$R$的圆盘$\Omega$上，$F$是圆盘上的积分，如
+\begin{equation}
+\begin{aligned}
+F=\int_{\Omega} f=\int_{0}^{2\pi}\int_{0}^{R} f(r,\theta)r\mathrm{d}r\mathrm{d}\theta.
+\end{aligned}
+\end{equation}
+显然，$F$依赖$R$，我们假设$f$总是依赖$R$，如$f=f(r,\theta;R)$。在物理例子中，$F$是液体通过横截面积为$\Omega$的管道的净流量(net flow rate)。在这种情况下，$f$是单位面积下的流速，可以是定义在$\Omega$上的偏微分方程的解。例如，在圆管中的Navier-Stokes流体。
+
+知道$F$关于$\Omega$的灵敏度是有好处的，例如为了优化目的。换句话说，如果$R$增加，$F$会如何变化呢？现在我们看$F$关于$R$进行求导：
+$$\frac{d}{dR}F=\int_{0}^{2\pi}\left( \frac{d}{dR}\int_{0}^{R}f(r,\theta;R)r\mathrm{d}r \right)\mathrm{d}\theta =\int_{0}^{2\pi}\int_{0}^{R}f^{'}(r,\theta;R)r\mathrm{d}r\mathrm{d}\theta + \int_{0}^{2\pi}f(R,\theta;R)R\mathrm{d}\theta$$
+这里$f^{'}$是关于$R$求导。$f$对$R$的依赖性可以看做$f$对$\Omega$的依赖性。例如，$f(\cdot;\Omega)\equiv f(\cdot;\Omega)$。使用笛卡尔坐标系(Cartesian coordinates)$\mathbf{x}$重新写上面公式有
+\begin{equation}
+\begin{aligned}
+\frac{d}{dR}F=\int_{\Omega}f^{'}(\mathbf{x};\Omega)\mathrm{d}\mathbf{x} + \int_{\partial \Omega}f(\mathbf{x};\Omega)\mathrm{d}S(\mathbf{x})
+\end{aligned}
+\end{equation}
+这里$\mathrm{d}\mathbf{x}$是体积测度，$\mathrm{d}S(\mathbf{x})$是表面积测度。
+
+\subsubsection{一般扰动}
+令$\boldsymbol{v}$是$\partial \Omega$的单位外法向量。我们把增加的$R$看做速度场（velocity field）$\mathbf{V}$,在法方向上$\mathbf{V}$驱动$\Omega$上的点，取在$\Omega$上$\mathbf{V}=\boldsymbol{v}$。因此，方程$(2)$变成
+\begin{equation}
+\begin{aligned}
+\frac{d}{dR}F=\int_{\Omega}f^{'}(\mathbf{x};\Omega)\mathrm{d}\mathbf{x} + \int_{\partial \Omega}f(\mathbf{x};\Omega)\mathbf{V}(\mathbf{x})\cdot \boldsymbol{v}(\mathbf{x})\mathrm{d}S(\mathbf{x})
+\end{aligned}
+\end{equation}
+我们把$\mathbf{V}$看成一个速度场，它会瞬间扰动（instantaneously perturbs domain）定义域$\Omega$。我们称$\mathbf{V}$是一个域扰动（domain perturbation）。现采用$f(\mathbf{x};\Omega)\equiv f(\Omega)$和$f^{'}(\mathbf{x};\Omega)\equiv f^{'}(\Omega;\mathbf{V})$，这里$f^{'}$是于域波动$\mathbf{V}$的$f$的形导数（shape derivative）。类似，我们定义$\delta F(\Omega;\mathbf{V})\equiv \frac{d}{dR}F$为$F$在方向$\mathbf{V}$上对于$\Omega$的形扰动（shape perturbation）。因此，我们有
+\begin{equation}
+\begin{aligned}
+\delta F(\Omega;\mathbf{V})=\int_{\Omega}f^{'}(\Omega;\mathbf{V})+\int_{\partial \Omega}f(\Omega)(\mathbf{V} \cdot \boldsymbol{v}),
+\end{aligned}
+\end{equation}
+这是第五章中公式$(5.47)$，
+$$\delta \varepsilon (\Omega;\mathbf{V})=\int_{\Omega}\dot{f}(\Omega;\mathbf{V})+\int_{\Omega}f(\Omega)(\bigtriangledown \cdot \mathbf{V})=\int_{\Omega}f^{'}(\Omega;\mathbf{V})+\int_{\partial \Omega}f(\Omega)(\mathbf{V} \cdot \boldsymbol{v})$$因此，我们导出公式$(5.47)$，其中对于$\Omega$是一个被速度场$\mathbf{V}$扰动的圆盘，使$\Omega$沿着法线方向上均匀扩大。这本书的主要目的是对于一般区域$\Omega$和一般扰动$\mathbf{V}$导出方程$(4)$，和其他类似的公式。
+
+形微分的框架提供了建立平均曲率流（mean curvature flow）和Willmore流方程的工具，它们是流体力学和生物学等许多应用中的几何流。见第六章和第七章例子。
+
+
+
+
 \input{test.tex}
 
+
+
+\nocite{*}
 \cite{tam19912d}
-\bibliography{../ref}
+%\bibliography{../ref}
 \end{document}
