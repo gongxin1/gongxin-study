@@ -104,7 +104,7 @@ p_0(\mathbf{r},s+\bigtriangleup s)=\int \, \mathrm{d}(\bigtriangleup \mathbf{r})
 连续链模型的一个有用的特点是，Chapman-Kolmogorov积分方程可以归结为偏微分方程，在概率论中可归结为Fokker-Planck方程(van Kampenn，1981)和量子理论中的Feynman-Kac公式(Feynman和Hibbs，1965)。我们通过导出与方程$(2.58)$相结合的Fokker-Planck方程来说明这一点。这一推导是方程的两边通过泰勒展开。注意到在这种情况下，$\Phi(\bigtriangleup \mathbf{r};\mathbf{r}-\bigtriangleup \mathbf{r})$与初始位置$\mathbf{r}-\bigtriangleup \mathbf{r}$无关，我们不扩展转移概率。有
 \begin{equation}
 \begin{aligned}
-p_0(\mathbf{r},s)+\bigtriangleup s\frac{\partial}{\partial s}p_0(\mathbf{r},s)+O(\bigtriangleup s^2)=&p_0(\mathbf{r},s)-\left \langle \bigtriangleup \mathbf{r} \right \rangle _\Phi \cdot \triangledown p_0 (\mathbf{r},s)\\ &+\frac{1}{2!}\left \langle \bigtriangleup \mathbf{r}  \bigtriangleup \mathbf{r} \right \rangle _\Phi:\triangledown \triangledown p_0(\mathbf{r},s)\\ &+O(\left \langle \bigtriangleup \mathbf{r}  \bigtriangleup \mathbf{r}  \bigtriangleup \mathbf{r} \right \rangle _\Phi)
+p_0(\mathbf{r},s)+\bigtriangleup s\frac{\partial}{\partial s}p_0(\mathbf{r},s)+O(\bigtriangleup s^2)=&p_0(\mathbf{r},s)-\left \langle \bigtriangleup \mathbf{r} \right \rangle _\Phi \cdot \bigtriangledown p_0 (\mathbf{r},s)\\ &+\frac{1}{2!}\left \langle \bigtriangleup \mathbf{r}  \bigtriangleup \mathbf{r} \right \rangle _\Phi:\bigtriangledown \bigtriangledown p_0(\mathbf{r},s)\\ &+O(\left \langle \bigtriangleup \mathbf{r}  \bigtriangleup \mathbf{r}  \bigtriangleup \mathbf{r} \right \rangle _\Phi)
 \end{aligned}
 \end{equation}
 其中，该方程中出现的$\Phi$平均定义为
@@ -121,7 +121,7 @@ p_0(\mathbf{r},s)+\bigtriangleup s\frac{\partial}{\partial s}p_0(\mathbf{r},s)+O
 如果我们将这些式子带入方程$(2.60)$中，则$\bigtriangleup s \rightarrow \infty$时的分布函数$p_0(\mathbf{r},s)$满足Fokker-Planck方程
 
 \begin{gather}
-\frac{\partial}{\partial s}p_0(\mathbf{r},s)=\frac{b^2}{6}p_0(\mathbf{r},s)
+\frac{\partial}{\partial s}p_0(\mathbf{r},s)=\frac{b^2}{6}\bigtriangledown ^2 p_0(\mathbf{r},s)
 \end{gather}
 
 因此，连续高斯链的Fokker-Planck方程给出的具有“扩散系数”$b^2/6$
