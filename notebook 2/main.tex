@@ -67,9 +67,49 @@ $$\delta \varepsilon (\Omega;\mathbf{V})=\int_{\Omega}\dot{f}(\Omega;\mathbf{V})
 \hline
 \end{tabular}
 \\
+上述表中类比并不相同，例如，只需要指定两个数$(x,y)$,而需要指定$\Omega$	无限个坐标对。$\mathbf{V}$是标量函数集合中的二维向量；对于形状函数，$\mathbf{V}$是一个完整的函数，需要在$\Omega$中的每一点上定义。这个“有限维数”是使用符号$\delta F(\Omega;\mathbf{V})$表示形状扰动。
 
+因此，$\delta F(\Omega;\mathbf{V})$表示为了减少$F$我们应该如何改变$\Omega$，类似于为了减少$f$，如何改变$\Delta f(x,y)$和对应的坐标对$(x,y)$。形状优化$[3,23,48,51,54,59,75,93,106,107]$。下一节将介绍工程形状优化的一个经典示例。\\
+\textbf{减少阻力}\\
+虽然下面的例子超出了本书的范围，但它很好地展示了形状微分学的威力。考虑经过刚体的流(参见图$1.1$)。流向量速度场$\mathbf{u}$以无维形式遵从称为Navier-Stokes方程的偏微分方程$[8,79,101]$:
+\begin{gather}
+\begin{aligned}
+(\mathbf{u}\cdot \Delta)\mathbf{u}-\Delta \cdot \sigma & =  0~~~in~\Omega,\\~\Delta \cdot \mathbf{u} & = 0~~~in~\Omega,\\~\mathbf{u}& =0~~~on~\Gamma _B,\\~\mathbf{u}& = e_x~~~on~\Gamma _O,
+\end{aligned}
+\end{gather}
 
-上述表中类比并不相同，例如，只需要指定两个数$(x,y)$,而需要指定$\Omega$	无限个坐标对。
+\begin{gather}
+\begin{aligned}
+\sigma(\mathbf{u},p):& = -pI+\frac{1}{Re}D(\mathbf{u})\\D(\mathbf{u}):& = ~\Delta \mathbf{u}+(\Delta \mathbf{u})^T
+\end{aligned}
+\end{gather}
+其中$0$为零向量，$e_x =(1,0)$为外边界$\Gamma _O$上的速度边界条件,$\sigma$为压力张量（stress tensor），$p$为压力。Reynolds数$Re$是与流的物理特性相关的无量纲参数。此时完全理解$(1.5)$和$(1.6)$并不重要。只要知道它们模拟了一个流如何在一个施加的流场中围绕一个固定的刚体运动就足够了。
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{./figures/11.png}
+\caption{流体通过刚性$\Omega _B$ 的图。流体在$\Omega$中出现，由Navier-Stokes方程控制。$\Omega$的边界，记为$\partial \Omega$，划分为$\partial \Omega = \Gamma _B \cup \Gamma _O$，$\Gamma _B$ 为刚体的边界，$\Gamma _O$为远离刚体的外边界。$\Omega$的单位外法向量为$\nu$。}
+\end{figure}
+
+这里的目标是找到最佳形状的$\Omega _B$，以尽量减少对身体的阻力;这是形状优化中的一个经典问题$[42,69,82 -84]$。为此，我们需要指定一个形状函数代表阻力，即，
+\begin{gather}
+J_d(\Omega)=-e_x \cdot \int_{\Gamma _B}~\sigma(\mathbf{u},p)\nu,
+\end{gather}
+其中，我们使用$\Omega$来表示$\Omega _B$的形状，(这是因为$\Omega$和$\Omega _B$共享边界$\Gamma _B$。也可以证明$J_d$等于
+\begin{gather}
+J_d(\Omega)=\frac{1}{2Re}\int _{\Omega}\left| D(\mathbf{u}) \right|
+\end{gather}
+表示在$\Omega$域中能量的粘性耗散总量(单位时间)。注意，很明显，$J_d \geq 0$。利用形状扰动机制，$\delta J_d(\Omega;\mathbf{V})$表明$J_d$改变当我们在方向$\mathbf{V}$上扰动$\Omega$。因此,我们可以使用这些信息来微小的改变$\Omega$，慢慢变成一个形状,具有更好的(低级）阻力特性。
+
+图$1.2$给出了一个数值计算来说明这一点。令$\Omega ^0$和$\Gamma _B$的初始猜测的形状的身体;这些在迭代$0$中显示。可以看到在身后面出现了两个大的涡流，这表明有大量的粘性耗散(大阻力)。优化过程，对于$\mathbf{V}$的许多不同的选择计算得到$\delta J_d(\Omega;\mathbf{V})$，至多选择一个驱动向下的$J_d$，最多。这个$\mathbf{V}$的选择用于在第一次迭代中将$\Gamma _B^0$变形为一个新的形状$\Gamma _B^1$，$\Gamma _B^0$在$\Gamma _B^1$和之间只有很小的差别。这个过程重复多次，结果如图$1.2$所示。注意旋涡（vorticses）是如何被更细的形状所消除的;显然，迭代$60$次时的对象比初始圆形具有更小的阻力。 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{./figures/12.png}
+\caption{通过图形优化阻力。从一个圆形的$\Gamma _B$(不是很符合空气动力学)开始，我们应用了一个最陡的下降优化方案来缓慢地进化到最小的$J_d$。蓝色曲线是速度场$\mathbf{u}$的流线，它满足$Re=200$的$(1.5)$
+}
+\end{figure}
+
+因此，形状扰动使我们能够在无限维的形状中“爬下山”。这是一个自动生成复杂工程设计的强大工具。在图$1.2$中，这是在没有人决策干涉的优化模型。在创建仅有人类干涉的$1.5$的计算机模型，开发了一种生成形状序列的优化算法。
+事实上，相同的优化机制可以用于不同的PDE系统，如弹性。描述形状优化的完整细节超出了本书的范围，但是在$6.3.1$节中有一个简短的讨论
 
 \subsection{概念}
 \subsubsection{向量}
@@ -81,8 +121,7 @@ $$
 $$
 \subsubsection{积分}
 我们通常使用$\Omega$作为$\mathbb{R}^3$中体积为正的定义域（或者$\mathbb{R}^2$）。我们定义$\Gamma$是$\mathbb{R}^3$的曲面，$\sum$是曲线。通常区域$D$s上特定映射表示$id_D$，例如$id_{\Omega}(\mathbf{x})=\mathbf{x}$，对$\Omega$中所有的$\mathbf{x}$,则
-$\int _{\Omega} f(\mathbf{x})\mathrm{d}\mathbf{x}=\iiint_{\Omega} f(x_1,x_2,x_3)\,
-\mathrm{d}x_1\,\mathrm{d}x_2\,\mathrm{d}x_3.$
+$\int _{\Omega} f(\mathbf{x})\mathrm{d}\mathbf{x}=\iiint_{\Omega} f(x_1,x_2,x_3)\,\mathrm{d}x_1\,\mathrm{d}x_2\,\mathrm{d}x_3.$
 $\mathrm{d}\mathbf{x}$是体积积分，$\mathrm{d}S(\mathbf{x})$是面积积分，$\mathrm{d}a(\mathbf{x})$是曲线积分。此外，我们经常写积分如下
 $$
 \int _{\Omega} f(\mathbf{x})\mathrm{d}\mathbf{x} \equiv \int _{\Omega} f,~~~\int _{\Gamma} f(\mathbf{x})\mathrm{d}S(\mathbf{x}) \equiv \int _{\Gamma} f,~~~\int _{\sum} f(\mathbf{x})\mathrm{d}a(\mathbf{x}) \equiv \int _{\sum} f
