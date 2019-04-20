@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/Trapezoid.dir/Trapezoid.cpp.o  -o Trapezoid 

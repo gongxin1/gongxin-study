@@ -1,0 +1,6 @@
+/home/gx/repository/cpp/test/build/CMakeFiles/rebuild_cache.dir
+/home/gx/repository/cpp/test/build/CMakeFiles/edit_cache.dir
+/home/gx/repository/cpp/test/build/CMakeFiles/Trapezoid.dir
+/home/gx/repository/cpp/test/build/CMakeFiles/test1.dir
+/home/gx/repository/cpp/test/build/CMakeFiles/hello_world.dir
+/home/gx/repository/cpp/test/build/CMakeFiles/test.dir
