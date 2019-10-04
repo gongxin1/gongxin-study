@@ -1,0 +1,130 @@
+% !Mode:: "TeX:UTF-8"
+\documentclass{article}
+\input{en_preamble.tex}
+\input{xecjk_preamble.tex}
+\begin{document}
+\title{三棱柱单元的实现细节及其应用}
+\author{魏华祎}
+\date{\chntoday}
+\maketitle
+\section{一般三棱柱体积的计算}
+
+$$
+\bfx = \beta_0(\lambda_0 \bfx_0 + \lambda_1 \bfx_1 + \lambda_2 \bfx_2) + 
+\beta_1(\lambda_0 \bfx_3 + \lambda_1 \bfx_4 + \lambda_2 \bfx_5)
+$$
+
+其中
+\begin{align*}
+    \lambda_0 =& 1 - u - v \\
+    \lambda_1 =& u \\
+    \lambda_2 =& v \\
+    \beta_0 = & 1 - w\\
+    \beta_1 = & w
+\end{align*}
+
+上述变换的 Jacobi 矩阵为
+
+$$
+\scriptsize
+\bfJ = \frac{\partial \bfx}{\partial \bfu}
+= 
+\begin{bmatrix}
+    \beta_0(x_1 - x_0) + \beta_1(x_4 - x_3) & 
+    \beta_0(x_2 - x_0) + \beta_1(x_5 - x_3) &
+    \lambda_0(x_3 - x_0) + \lambda_1(x_4 - x_1) + \lambda_2(x_5 - x_2)\\
+    \beta_0(y_1 - y_0) + \beta_1(y_4 - y_3) & 
+    \beta_0(y_2 - y_0) + \beta_1(y_5 - y_3) &
+    \lambda_0(y_3 - y_0) + \lambda_1(y_4 - y_1) + \lambda_2(y_5 - y_2)\\
+    \beta_0(z_1 - z_0) + \beta_1(z_4 - z_3) & 
+    \beta_0(z_2 - z_0) + \beta_1(z_5 - z_3) &
+    \lambda_0(z_3 - z_0) + \lambda_1(z_4 - z_1) + \lambda_2(z_5 - z_2)\\
+\end{bmatrix}
+$$
+
+\section{三棱柱单元上的基函数}
+
+三角形单元上的 $k$ 次多项式空间共有 $n_k = \frac{(k+1)(k+2)}{2}$ 个基函数 
+$\{\phi_i\}_{i=0}^{n_k-1}$. 区间单元上的 $k$ 次多项式空间共有$k+1$ 个基函数 $\{\varphi_j\}_{j=0}^{k}$.
+
+
+三棱柱单元上的 $k$ 次多项式空间共有 $n_k(k+1)$ 个基函数.
+$$
+\begin{pmatrix}
+    \varphi_0 \\ \varphi_1 \\ \vdots \\ \varphi_k
+\end{pmatrix}
+\begin{pmatrix}
+    \phi_0 & \phi_1 & \cdots & \phi_{n_k-1}
+\end{pmatrix}
+$$
+
+$$
+\psi_{i, j}(\bfx) = \varphi_i\phi_j
+$$
+
+记 $\bfu = [u, v, w]^T$
+
+$$
+\nabla_{\bfx} \psi_{i, j}(\bfx) = J^{-1} 
+\nabla_{\bfu} \psi_{i, j}(\bfx(\bfu)) 
+= \varphi_i J^{-1}\nabla_{\bfu}\phi_j + \phi_j J^{-1} \nabla_{\bfu}\varphi_i
+= \varphi_i \nabla_{\bfx}\phi_j + \phi_j\nabla_{\bfx}\varphi_i
+$$
+
+$$
+\left[\frac{\partial \psi_{i,j}}{\partial x},\frac{\partial \psi_{i,j}}{\partial y},\frac{\partial \psi_{i,j}}{\partial z}\right]^T=J^{-1}\left[\frac{\partial \psi_{i,j}}{\partial u},\frac{\partial \psi_{i,j}}{\partial v},\frac{\partial \psi_{i,j}}{\partial w}\right]^T
+$$
+
+$$
+=J^{-1}\left[\varphi_i \frac{\partial \phi_j}{\partial u},\varphi_i \frac{\partial \phi_j}{\partial v},\phi_i \frac{\partial \varphi_i}{\partial w}\right]^T
+$$
+
+$$
+=J^{-1}\left[\varphi_i(\frac{\partial \phi_j}{\partial \lambda_0}\frac{\partial \lambda_0}{\partial u}+\frac{\partial \phi_j}{\partial \lambda_1} \frac{\partial \lambda_1}{\partial u}+\frac{\partial \phi_j}{\partial \lambda_2} \frac{\partial \lambda_2}{\partial u}),
+\varphi_i(\frac{\partial \phi_j}{\partial \lambda_0}\frac{\partial \lambda_0}{\partial v}+\frac{\partial \phi_j}{\partial \lambda_1} \frac{\partial \lambda_1}{\partial v}+\frac{\partial \phi_j}{\partial \lambda_2} \frac{\partial \lambda_2}{\partial v}),
+\phi_j(\frac{\partial \varphi_i}{\partial \beta_0} \frac{\partial \beta_0}{\partial w}+\frac{\partial \varphi_i}{\partial \beta_1} \frac{\partial \beta_1}{\partial w})\right]^T
+$$
+
+$$
+=J^{-1}\left[\varphi_i(-\frac{\partial \phi_j}{\partial \lambda_0}+\frac{\partial \phi_j}{\partial \lambda_1}),\varphi_i(-\frac{\partial \phi_j}{\partial \lambda_0}+\frac{\partial \phi_j}{\partial \lambda_2}),\phi_j(-\frac{\partial \varphi_i}{\partial \beta_0}+\frac{\partial \varphi_i}{\partial \beta_1})\right]^T
+$$
+
+$$J^{-1}=\frac{\begin{vmatrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}\\
+a_{31} & a_{32} & a_{33}
+\end{vmatrix}
+}{|J|}$$
+
+三棱柱单元的基函数是由三角单元上基函数和区间单元上基函数张成的，当我们再给定$\varphi$时可以确定三棱柱中间的一个三角形截面。同理，当我们给定$\phi$时，我们可以确定三角形截面上一个点$\bfx$，过此点可以确定一条直线$l$。
+
+
+
+1．现在三角形基函数$\phi$沿着三角形截面的梯度可以计算出，我们设为已知，且$\phi$沿着前面直线$l$的导数为$0$,我们考虑$\phi$在$\bfx$点处的空间梯度是多少？
+
+如果三角形单元在$xoy$平面上或者平行$xoy$平面，那么对$z$求导会为$０$
+$$\nabla_{\bfx} \phi =[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},\frac{\partial \phi}{\partial z}]=[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},0]$$
+
+
+如果三角单元不在$xoy$平面，那么基函数与$z$有关($\phi$是也是用面积比求的，不过会与$z$有关)
+$$\nabla_{\bfx} \phi =[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},\frac{\partial \phi}{\partial z}]$$
+
+2．同理对于区间上基函数$\varphi$沿着直线$l$的导数可以算出，我们设为已知，且因为在三角形截面上因为$\beta_0,\beta_1$为常数，所以求导为$0$。我们考虑$\varphi$在$\bfx$处的空间梯度是多少？
+
+
+如果区间单元平行$z$轴，那么$\varphi$与$x,y$无关，求导为$0$
+$$\nabla_{\bfx} \varphi =[\frac{\partial \varphi}{\partial x},\frac{\partial \varphi}{\partial y},\frac{\partial \varphi}{\partial z}]=[0,0,\frac{\partial \varphi}{\partial z}]$$
+
+如果区间单元不平行$z$轴，那么$\varphi$与$x,y$有关
+$$\nabla_{\bfx} \varphi =[\frac{\partial \varphi}{\partial x},\frac{\partial \varphi}{\partial y},\frac{\partial \varphi}{\partial z}]$$
+
+
+
+$$\varphi_i \nabla_{\bfx}\phi_j + \phi_j\nabla_{\bfx}\varphi_i=\varphi_i[\frac{\partial \phi_j}{\partial x},\frac{\partial \phi_j}{\partial y},\frac{\partial \phi_j}{\partial z}]+\phi_j[\frac{\partial \varphi_i}{\partial x},\frac{\partial \varphi_i}{\partial y},\frac{\partial \varphi_i}{\partial z}]$$
+
+%=\varphi_i[\frac{\partial \phi_j}{\partial x},\frac{\partial \phi_j}{\partial y},0]+\phi_j[0,0,\frac{\partial \phi_j}{\partial z}]=[\varphi_i\frac{\partial \phi_j}{\partial x},\varphi_i\frac{\partial \phi_j}{\partial y},\phi_j\frac{\partial \phi_j}{\partial z}]
+
+\cite{sheng2008}
+\bibliographystyle{abbrv}
+\bibliography{ref}
+\end{document}
