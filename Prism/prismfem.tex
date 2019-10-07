@@ -96,31 +96,50 @@ a_{31} & a_{32} & a_{33}
 \end{vmatrix}
 }{|J|}$$
 
-三棱柱单元的基函数是由三角单元上基函数和区间单元上基函数张成的，当我们再给定$\varphi$时可以确定三棱柱中间的一个三角形截面。同理，当我们给定$\phi$时，我们可以确定三角形截面上一个点$\bfx$，过此点可以确定一条直线$l$。
+三棱柱单元的基函数是由三角单元上基函数和区间单元上基函数张成的，当我们再给定$\varphi$时可以确定三棱柱中间的一个三角形截面。同理，当我们给定$\phi$时，我们可以确定三角形截面上一个点$\bfx$，过此点可以确定一条直线$l$，它的单位方向为$\bf r$。三角形平面$\tau$的单位法向量为$\bfn$。
+
+1．现在三角形基函数$\phi$沿着三角形截面的梯度可以计算出为$\nabla \phi $，我们设为已知，且$\phi$沿着前面直线$l$的导数为$0$,我们考虑$\phi_j$在$\bfx$点处的空间梯度是多少？
+
+现在$\phi$沿着前面直线$l$的导数$\nabla \phi$为$0$，所以$\nabla \varphi \perp \bf r$，因为$\nabla _{\bfx} \phi$的投影就是$\nabla \phi$，故
+
+$$\frac{\nabla \phi}{\nabla _{\bfx} \phi}=\cos \theta$$
+$$\bf r \cdot \bfn=|\bf r|\cdot |\bfn|\cdot \cos \theta$$
+即
+$$\nabla _{\bfx}\phi=\frac{|\bf r|\cdot|\bfn| \cdot \nabla \phi}{\bf r \cdot \bfn }$$
 
 
 
-1．现在三角形基函数$\phi$沿着三角形截面的梯度可以计算出，我们设为已知，且$\phi$沿着前面直线$l$的导数为$0$,我们考虑$\phi$在$\bfx$点处的空间梯度是多少？
 
-如果三角形单元在$xoy$平面上或者平行$xoy$平面，那么对$z$求导会为$０$
-$$\nabla_{\bfx} \phi =[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},\frac{\partial \phi}{\partial z}]=[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},0]$$
+%如果三角形单元在$xoy$平面上或者平行$xoy$平面，那么对$z$求导会为$０$
+%$$\nabla_{\bfx} \phi =[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},\frac{\partial \phi}{\partial z}]=[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},0]$$
 
 
-如果三角单元不在$xoy$平面，那么基函数与$z$有关($\phi$是也是用面积比求的，不过会与$z$有关)
-$$\nabla_{\bfx} \phi =[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},\frac{\partial \phi}{\partial z}]$$
+%如果三角单元不在$xoy$平面，那么基函数与$z$有关($\phi$是也是用面积比求的，不过会与$z$有关)
+%$$\nabla_{\bfx} \phi =[\frac{\partial \phi}{\partial x},\frac{\partial \phi}{\partial y},\frac{\partial \phi}{\partial z}]$$
 
 2．同理对于区间上基函数$\varphi$沿着直线$l$的导数可以算出，我们设为已知，且因为在三角形截面上因为$\beta_0,\beta_1$为常数，所以求导为$0$。我们考虑$\varphi$在$\bfx$处的空间梯度是多少？
 
+现在$\varphi$对三角形截面梯度$\nabla \varphi$为$0$，所以$\nabla \varphi // \bfn$。因为$\nabla _{\bfx} \varphi$在$\bfn$上的投影就是$\nabla \varphi$，故
 
-如果区间单元平行$z$轴，那么$\varphi$与$x,y$无关，求导为$0$
-$$\nabla_{\bfx} \varphi =[\frac{\partial \varphi}{\partial x},\frac{\partial \varphi}{\partial y},\frac{\partial \varphi}{\partial z}]=[0,0,\frac{\partial \varphi}{\partial z}]$$
-
-如果区间单元不平行$z$轴，那么$\varphi$与$x,y$有关
-$$\nabla_{\bfx} \varphi =[\frac{\partial \varphi}{\partial x},\frac{\partial \varphi}{\partial y},\frac{\partial \varphi}{\partial z}]$$
-
+$$\frac{\nabla \varphi}{\nabla _{\bfx} \varphi}=\cos \theta$$
+$$\bf r \cdot \nabla \varphi = |\bf r| \cdot|\nabla \varphi|\cdot \cos \theta$$
+即
+$$\nabla _{\bfx} \varphi=\frac{|\bf r| \cdot|\nabla \varphi| \cdot \nabla \varphi}{\bf r \cdot \nabla \varphi}$$
 
 
-$$\varphi_i \nabla_{\bfx}\phi_j + \phi_j\nabla_{\bfx}\varphi_i=\varphi_i[\frac{\partial \phi_j}{\partial x},\frac{\partial \phi_j}{\partial y},\frac{\partial \phi_j}{\partial z}]+\phi_j[\frac{\partial \varphi_i}{\partial x},\frac{\partial \varphi_i}{\partial y},\frac{\partial \varphi_i}{\partial z}]$$
+
+
+
+
+%如果区间单元平行$z$轴，那么$\varphi$与$x,y$无关，求导为$0$
+%$$\nabla_{\bfx} \varphi =[\frac{\partial \varphi}{\partial x},\frac{\partial \varphi}{\partial y},\frac{\partial \varphi}{\partial z}]=[0,0,\frac{\partial \varphi}{\partial z}]$$
+
+%如果区间单元不平行$z$轴，那么$\varphi$与$x,y$有关
+%$$\nabla_{\bfx} \varphi =[\frac{\partial \varphi}{\partial x},\frac{\partial \varphi}{\partial y},\frac{\partial \varphi}{\partial z}]$$
+
+
+
+%$$\varphi_i \nabla_{\bfx}\phi_j + \phi_j\nabla_{\bfx}\varphi_i=\varphi_i[\frac{\partial \phi_j}{\partial x},\frac{\partial \phi_j}{\partial y},\frac{\partial \phi_j}{\partial z}]+\phi_j[\frac{\partial \varphi_i}{\partial x},\frac{\partial \varphi_i}{\partial y},\frac{\partial \varphi_i}{\partial z}]$$
 
 %=\varphi_i[\frac{\partial \phi_j}{\partial x},\frac{\partial \phi_j}{\partial y},0]+\phi_j[0,0,\frac{\partial \phi_j}{\partial z}]=[\varphi_i\frac{\partial \phi_j}{\partial x},\varphi_i\frac{\partial \phi_j}{\partial y},\phi_j\frac{\partial \phi_j}{\partial z}]
 
